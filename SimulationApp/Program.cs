@@ -6,6 +6,10 @@ namespace SimulationApp
 {
     static class Program
     {
+        // Import the InitializeSimulation function from the DLL
+        [DllImport("SimulationEngine.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void InitializeSimulation(string coordsFile, string timeFile, string tFile, string mfFile);
+
         // Import the RunSimulation function from the DLL
         [DllImport("SimulationEngine.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void RunSimulation(double parameter);
@@ -29,23 +33,26 @@ namespace SimulationApp
 
             if (!string.IsNullOrEmpty(dllDirectory))
             {
-                // Add the DLL directory to the PATH environment variable
                 Environment.SetEnvironmentVariable("PATH", Environment.GetEnvironmentVariable("PATH") + ";" + dllDirectory);
-
-                // Set the directory where the DLL is located
                 SetDllDirectory(dllDirectory);
             }
             else
             {
                 throw new Exception($"{dllName} not found in the solution directory.");
             }
-            
-            // Load the DLL
+
             IntPtr pDll = LoadLibrary(@dllName);
             if (pDll == IntPtr.Zero)
             {
                 throw new Exception("Unable to load DLL");
             }
+
+            // Initialize the simulation with the HDF5 files
+            string coordsFile = @"path\to\coords.h5";
+            string timeFile = @"path\to\time.h5";
+            string tFile = @"path\to\T.h5";
+            string mfFile = @"path\to\MF.h5";
+            InitializeSimulation(coordsFile, timeFile, tFile, mfFile);
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

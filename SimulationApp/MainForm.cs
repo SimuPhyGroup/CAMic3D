@@ -12,7 +12,14 @@ namespace SimulationApp
 
         private void btnRunSimulation_Click(object sender, EventArgs e)
         {
-            double parameter = 42.0; // Example parameter
+            // Get parameter from user input
+            double parameter;
+            if (!double.TryParse(txtParameter.Text, out parameter))
+            {
+                MessageBox.Show("Invalid parameter");
+                return;
+            }
+            
             Program.RunSimulation(parameter);
             double result = Program.GetSimulationResult();
             MessageBox.Show($"Simulation result: {result}");

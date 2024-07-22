@@ -24,6 +24,9 @@
     <ClInclude Include="SimulationEngine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="HDF5Loader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -33,6 +36,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SimulationEngine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="HDF5Loader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
