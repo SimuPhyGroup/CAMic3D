@@ -17,29 +17,39 @@ namespace SimulationApp
         [DllImport("kernel32.dll", SetLastError = true)]
         static extern bool SetDllDirectory(string lpPathName);
 
+        [DllImport("kernel32.dll", SetLastError = true)]
+        static extern IntPtr LoadLibrary(string lpFileName);
+
         [STAThread]
         static void Main()
         {
-            // Set the directory where the DLL is located
-            SetDllDirectory(@"C:\git\CAMic3D\SimulationEngine\x64\Debug\");
+            string solutionRoot = @"C:\git\CAMic3D"; // Set this to your solution's root directory
+            string dllName = "SimulationEngine.dll";
+            string dllDirectory = DllFinder.FindDll(solutionRoot, dllName);
 
-            // Load the DLL
-            IntPtr pDll = LoadLibrary(@"SimulationEngine.dll");
-            if (pDll == IntPtr.Zero)
+            if (!string.IsNullOrEmpty(dllDirectory))
             {
-                Console.WriteLine("Unable to load DLL");
+                // Add the DLL directory to the PATH environment variable
+                Environment.SetEnvironmentVariable("PATH", Environment.GetEnvironmentVariable("PATH") + ";" + dllDirectory);
+
+                // Set the directory where the DLL is located
+                SetDllDirectory(dllDirectory);
             }
             else
             {
-                Console.WriteLine("DLL Loaded Successfully");
+                throw new Exception($"{dllName} not found in the solution directory.");
+            }
+            
+            // Load the DLL
+            IntPtr pDll = LoadLibrary(@dllName);
+            if (pDll == IntPtr.Zero)
+            {
+                throw new Exception("Unable to load DLL");
             }
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainForm());
         }
-
-        [DllImport("kernel32.dll", SetLastError = true)]
-        static extern IntPtr LoadLibrary(string lpFileName);
     }
 }
