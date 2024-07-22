@@ -10,6 +10,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimulationApp", "Simulation
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SimulationEngine", "..\SimulationEngine\SimulationEngine.vcxproj", "{955FECFE-721E-49B0-BC88-9112D78043C6}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5D287E5E-81A1-455A-B065-130392A853AF}"
+	ProjectSection(SolutionItems) = preProject
+		..\Utilities\ARCHITECTURAL DESIGN.md = ..\Utilities\ARCHITECTURAL DESIGN.md
+		..\Utilities\hdf5-1.14.4-3.zip = ..\Utilities\hdf5-1.14.4-3.zip
+		..\Utilities\LICENSE.md = ..\Utilities\LICENSE.md
+		..\Utilities\README.md = ..\Utilities\README.md
+		..\Utilities\UsefulCppInfoDuringLearningPeriod.md = ..\Utilities\UsefulCppInfoDuringLearningPeriod.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
